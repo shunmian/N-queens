@@ -1,4 +1,4 @@
-const N = 8
+const N = 4
 
 function* range (max) {
     for (let i = 0; i < max; i++ ) yield i;
@@ -10,7 +10,10 @@ const isConflict = (solution, i) => {
     const itemJ = idx
     const candidateI = i
     const candidateJ = solution.length
-    if (candidateI === itemI || candidateJ === itemJ || Math.abs(candidateI - itemI) === Math.abs(candidateJ - itemJ)) {
+    if (candidateI === itemI || // horizontal conflict
+        candidateJ === itemJ || // vertical conflict
+        Math.abs(candidateI - itemI) === Math.abs(candidateJ - itemJ) // diagonal conflict
+    ) {
       return true
     }
   }

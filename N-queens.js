@@ -1,4 +1,3 @@
-
 function* range (max) {
   for (let i = 0; i < max; i++ ) yield i;
 }
@@ -9,13 +8,13 @@ class NQueens {
     this.solutions = []
   }
 
-  getSolutions(){
+  getSolutions() {
     this.dfs()
     return this.solutions
   }
 
-  isConflict(solution, i){
-    for(let idx of range(solution.length)){
+  isConflict(solution, i) {
+    for(let idx of range(solution.length)) {
       const itemI = solution[idx]
       const itemJ = idx
       const candidateI = i
@@ -36,18 +35,18 @@ class NQueens {
       return
     }
     for (let i of range(this.N)) {
-      if (this.isConflict(solution, i)){
+      if (this.isConflict(solution, i)) {
         continue
-      }else {
+      } else {
         this.dfs([...solution, i])
       }
     }
   }
 
-  toString(solution){
+  toString(solution) {
     let s = ''
-    for (let j of range(this.N)){
-      for (let i of range(this.N)){
+    for (let j of range(this.N)) {
+      for (let i of range(this.N)) {
         solution[j] === i ? s = s + ' Q' : s = s + ' *'
       }
       s = s + '\n'
@@ -56,7 +55,7 @@ class NQueens {
   }
 }
 
-const nQueens = new NQueens(8)
+const nQueens = new NQueens(4)
 for (solution of nQueens.getSolutions()) {
   console.log(nQueens.toString(solution))
 }

@@ -1,8 +1,11 @@
 const GRID_NO = 4
 
+function* range (max) {
+    for (let i = 0; i < max; i++ ) yield i;
+}
+
 const isConflict = (solution, i) => {
-  const j = solution.length
-  for(let idx = 0; idx < j; idx++){
+  for(let idx of range(solution.length)){
     const itemI = solution[idx]
     const itemJ = idx
     const candidateI = i
@@ -20,15 +23,27 @@ const nQueensSolution = (solution= []) => {
     solutions.push(solution)
     return
   }
-  for (let i = 0; i < GRID_NO; i++){  //if not conflict, call nQueensSolution  res.push(i)
+  for (let i of range(GRID_NO)) {
     if (isConflict(solution, i)){
       continue
     }else {
-      nQueensSolution([...solution,i])
+      nQueensSolution([...solution, i])
     }
-    //else do nothing
   }
 }
 
+const toString = (solution) => {
+  let s = ''
+  for (let j of range(GRID_NO)){
+    for (let i of range(GRID_NO)){
+      solution[j] === i ? s = s + ' Q' : s = s + ' *'
+    }
+    s = s + '\n'
+  }
+  return s
+}
+
 nQueensSolution([], 0)
-console.log(solutions)
+for (let idx in solutions){
+  console.log(toString(solutions[idx]))
+}
